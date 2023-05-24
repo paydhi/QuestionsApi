@@ -10,5 +10,6 @@
 1. `git clone https://github.com/paydhi/QuestionsApi.git`
 2. `docker compose up -d`
 
-Backend now runs on localhost:8000, postgres runs on localhost:5432 
-To stop server just run `docker compose stop`
+Backend now runs on localhost:8000, postgres runs on localhost:5432
+
+To stop app just run `docker compose stop`
