@@ -5,7 +5,7 @@
 1. Git
 2. Docker
 
-### How to run server
+### How to run app
 
 1. `git clone https://github.com/paydhi/QuestionsApi.git`
 2. `docker compose up -d`
