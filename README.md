@@ -13,4 +13,6 @@
 
 Backend now runs on localhost:8000, postgres runs on localhost:5432
 
-To stop app just run `docker compose stop`
+To stop app just run `docker compose stop`.
+
+To completely remove containers and networks, run `docker compose down`.
