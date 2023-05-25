@@ -4,6 +4,7 @@
 
 1. Git
 2. Docker
+3. Docker-compose >= 3.9
 
 ### How to run app
 
