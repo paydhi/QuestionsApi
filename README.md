@@ -17,3 +17,10 @@ Backend now runs on localhost:8000, postgres runs on localhost:5432
 To stop app just run `docker compose stop`.
 
 To completely remove containers and networks, run `docker compose down`.
+
+### What requests to send
+
+You need to send requests to URL `http://localhost:8000/api/questions/`.
+
+Send post request with JSON that looks like this: `{"questions_num": int}`
+, where `int` must be integer, not string or float, and greater than 0.
