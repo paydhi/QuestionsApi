@@ -41,8 +41,10 @@ class QuestionsViewSet(APIView):
                     i += 1
                 if i == len(questions):
                     fin = True
-        if questions:
+        if latest_record is not None:
             return Response(QuestionsSerializer(latest_record, many=False).data)
+        elif latest_record is None:
+            return Response({}, status=400)
         else:
             return Response({'detail': 'No questions found on jservice.io'}, status=400)
 
