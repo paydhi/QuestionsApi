@@ -53,5 +53,9 @@ def options(self, request, *args, **kwargs):
     return Response({'message': 'Success',
                      'expect': {'questions_num': 'int'},
                      'return': {
-                         'message': 'Success',
-                         'questions_num': 'int'}})
+                         "id": "int, id_in_db",
+                         "jservice_id": "int, id in jservice.io db",
+                         "answer": "answer to question",
+                         "question": "random question from jservice.io",
+                         "question_created_at": "datetime, date at which question was created in jservice.io db",
+                     }})
