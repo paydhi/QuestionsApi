@@ -22,5 +22,8 @@ To completely remove containers and networks, run `docker compose down`.
 
 You need to send requests to URL `http://localhost:8000/api/questions/`.
 
-Send post request with JSON that looks like this: `{"questions_num": int}`
+Send `POST` request with JSON that looks like this: `{"questions_num": int}`
 , where `int` must be integer, not string or float, and greater than 0.
+
+Also, you can send `OPTIONS` request to see what is expected, and
+what you will receive.

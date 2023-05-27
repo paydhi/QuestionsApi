@@ -42,20 +42,29 @@ class QuestionsViewSet(APIView):
                 if i == len(questions):
                     fin = True
         if latest_record is not None:
-            return Response(QuestionsSerializer(latest_record, many=False).data)
+            return Response(QuestionsSerializer(latest_record, many=False).data, status=200)
         elif latest_record is None:
             return Response({}, status=400)
         else:
             return Response({'detail': 'No questions found on jservice.io'}, status=400)
 
-
-def options(self, request, *args, **kwargs):
-    return Response({'message': 'Success',
-                     'expect': {'questions_num': 'int'},
-                     'return': {
-                         "id": "int, id_in_db",
-                         "jservice_id": "int, id in jservice.io db",
-                         "answer": "answer to question",
-                         "question": "random question from jservice.io",
-                         "question_created_at": "datetime, date at which question was created in jservice.io db",
-                     }})
+    def options(self, request, *args, **kwargs):
+        options_data = {
+            'expect': {
+                'methods': {
+                    'OPTIONS': None,
+                    'POST': {
+                        'method': 'POST',
+                        'JSON': {'questions_num': 'int', },
+                    },
+                },
+                'return': {
+                    'id': 'int: id_in_db',
+                    'jservice_id': 'int: id in jservice.io db',
+                    'answer': 'str: answer to question',
+                    'question': 'str: random question from jservice.io',
+                    'question_created_at': 'datetime: date at which question was created in jservice.io db',
+                },
+            },
+        }
+        return Response(options_data, status=200)
