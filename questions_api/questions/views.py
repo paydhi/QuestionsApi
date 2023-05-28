@@ -7,7 +7,7 @@ from questions.utils import get_questions, get_questions_for_db, save_questions
 
 
 class QuestionsViewSet(APIView):
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         serializer_data = QuestionsPostSerializer(data=request.data)
         if not serializer_data.is_valid():
             return Response(serializer_data.errors, status=400)
