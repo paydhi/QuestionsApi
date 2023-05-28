@@ -19,3 +19,7 @@ class QuestionsPostSerializer(serializers.Serializer):
 
     class Meta:
         fields = ['questions_num']
+
+    def validate_questions_num(self, value):
+        if value < 1:
+            raise serializers.ValidationError('questions_num must be greater than 0')
