@@ -12,3 +12,10 @@ class QuestionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questions
         fields = ['id', 'jservice_id', 'answer', 'question', 'jservice_created_at']
+
+
+class QuestionsPostSerializer(serializers.Serializer):
+    questions_num = serializers.IntegerField()
+
+    class Meta:
+        fields = ['questions_num']
