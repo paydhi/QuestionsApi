@@ -1,35 +1,20 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import requests
+from loguru import logger
 
 from questions.models import Questions
 from questions.serializers import QuestionsSerializer
+from questions.utils import get_questions, get_questions_for_db, save_questions
 
 
 class QuestionsViewSet(APIView):
     def post(self, request):
-        request.data.get('questions_num')
-
         latest_record = Questions.objects.last()
-        fin = False
-        while not fin:
-            questions = requests.get(f"https://jservice.io/api/random?count={request.data.get('questions_num')}")
-            questions = questions.json()
-            i = 0
-            for question in questions:
-                if Questions.objects.filter(jservice_id=question['id']).exists():
-                    break
-                question_for_db = {
-                    'jservice_id': question.get('id'),
-                    'answer': question.get('answer'),
-                    'question': question.get('question'),
-                    'jservice_created_at': question.get('created_at'),
-                }
-                question_for_db = Questions(**question_for_db)
-                question_for_db.save()
-                i += 1
-            if i == len(questions):
-                fin = True
+        questions_num = request.data.get('questions_num')
+
+        questions = get_questions(questions_num)
+        questions_for_db = get_questions_for_db(questions)
+        save_questions(questions_for_db)
 
         if latest_record:
             return Response(QuestionsSerializer(latest_record, many=False).data, status=200)
