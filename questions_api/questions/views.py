@@ -23,24 +23,23 @@ class QuestionsViewSet(APIView):
         else:
             return Response({}, status=200)
 
-
-def options(self, request, *args, **kwargs):
-    options_data = {
-        'expect': {
-            'methods': {
-                'OPTIONS': None,
-                'POST': {
-                    'method': 'POST',
-                    'JSON': {'questions_num': 'int', },
+    def options(self, request, *args, **kwargs):
+        options_data = {
+            'expect': {
+                'methods': {
+                    'OPTIONS': None,
+                    'POST': {
+                        'method': 'POST',
+                        'JSON': {'questions_num': 'int', },
+                    },
+                },
+                'return': {
+                    'id': 'int: id_in_db',
+                    'jservice_id': 'int: id in jservice.io db',
+                    'answer': 'str: answer to question',
+                    'question': 'str: random question from jservice.io',
+                    'jservice_created_at': 'datetime: date at which question was created in jservice.io db',
                 },
             },
-            'return': {
-                'id': 'int: id_in_db',
-                'jservice_id': 'int: id in jservice.io db',
-                'answer': 'str: answer to question',
-                'question': 'str: random question from jservice.io',
-                'jservice_created_at': 'datetime: date at which question was created in jservice.io db',
-            },
-        },
-    }
-    return Response(options_data, status=200)
+        }
+        return Response(options_data, status=200)
