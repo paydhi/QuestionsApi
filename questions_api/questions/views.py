@@ -21,7 +21,7 @@ class QuestionsViewSet(APIView):
             try:
                 latest_record = Questions.objects.latest('id')
             except Questions.DoesNotExist:
-                latest_record = {}
+                latest_record = None
             fin = False
             while not fin:
                 questions = requests.get(f"https://jservice.io/api/random?count={request.data.get('questions_num')}")
@@ -34,7 +34,7 @@ class QuestionsViewSet(APIView):
                         'jservice_id': question['id'],
                         'answer': question['answer'],
                         'question': question['question'],
-                        'question_created_at': question['created_at'],
+                        'jservice_created_at': question['created_at'],
                     }
                     question_for_db = Questions(**question_for_db)
                     question_for_db.save()
@@ -61,7 +61,7 @@ class QuestionsViewSet(APIView):
                     'jservice_id': 'int: id in jservice.io db',
                     'answer': 'str: answer to question',
                     'question': 'str: random question from jservice.io',
-                    'question_created_at': 'datetime: date at which question was created in jservice.io db',
+                    'jservice_created_at': 'datetime: date at which question was created in jservice.io db',
                 },
             },
         }
