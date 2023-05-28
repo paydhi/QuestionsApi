@@ -21,7 +21,7 @@ class QuestionsViewSet(APIView):
             try:
                 latest_record = Questions.objects.latest('id')
             except Questions.DoesNotExist:
-                latest_record = None
+                latest_record = {}
             fin = False
             while not fin:
                 questions = requests.get(f"https://jservice.io/api/random?count={request.data.get('questions_num')}")
@@ -41,8 +41,10 @@ class QuestionsViewSet(APIView):
                     i += 1
                 if i == len(questions):
                     fin = True
-        if latest_record is not None:
+        if latest_record != {}:
             return Response(QuestionsSerializer(latest_record, many=False).data, status=200)
+        elif latest_record == {}:
+            return Response(latest_record, status=400)
         else:
             return Response({'detail': 'No questions found on jservice.io'}, status=400)
 
