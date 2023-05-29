@@ -14,7 +14,7 @@
 
 Backend now runs on localhost:8000, postgres runs on localhost:5432.
 
-User:password for DB is postgres:postgres, as stated in `settings.py` and
+`USER:PASSWORD` for DB is `postgres:postgres`, as stated in `settings.py` and
 `docker-compose.yml`
 
 To stop app just run `docker compose stop`.
