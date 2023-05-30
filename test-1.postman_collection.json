@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "3d02a557-5aa6-443d-9a5b-c3035e9738e1",
+		"name": "test-1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "questions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"questions_num\": 3}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/questions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"questions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "questions",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/questions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"questions",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
