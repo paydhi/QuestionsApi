@@ -28,7 +28,7 @@ You need to send requests to URL `http://localhost:8000/api/questions/`.
 Send `POST` request with JSON that looks like this: `{"questions_num": int}`,
 where `int` must be integer, not string or float, and greater than 0.
 
-Additionally, you can use Postman collection, named `test-1.postman_collection.json`,
+Additionally, you can use Postman collection, named `questions_api.postman_collection.json`,
 located in root of this repo. 
 
 Also, you can send `OPTIONS` request to see what is expected, and
