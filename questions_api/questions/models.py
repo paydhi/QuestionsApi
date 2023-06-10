@@ -6,6 +6,7 @@ class Questions(models.Model):
     answer = models.TextField(blank=False, null=False)
     question = models.TextField(blank=False, null=False)
     jservice_created_at = models.DateTimeField(auto_now=False, blank=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, blank=False, null=False)
 
     class Meta:
         verbose_name = 'Question'

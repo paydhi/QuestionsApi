@@ -3,20 +3,21 @@ from rest_framework.views import APIView
 
 from questions.models import Questions
 from questions.serializers import QuestionsSerializer, QuestionsPostSerializer
-from questions.utils import get_questions, get_questions_for_db, save_questions
+from questions.utils import get_questions, save_questions
 
 
 class QuestionsViewSet(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer_data = QuestionsPostSerializer(data=request.data)
-        if not serializer_data.is_valid():
-            return Response(serializer_data.errors, status=400)
+    serializer_class = QuestionsSerializer
 
-        latest_record = Questions.objects.last()
-        questions_num = request.data.get('questions_num')
+    def post(self, request, *args, **kwargs):
+        serializer_in_data = QuestionsPostSerializer(data=request.data)
+        serializer_in_data.is_valid(raise_exception=True)
+
+        latest_record = Questions.objects.order_by('created_at').last()
+        questions_num = serializer_in_data.validated_data.get('questions_num')
+
         questions = get_questions(questions_num)
-        questions_for_db = get_questions_for_db(questions)
-        save_questions(questions_for_db)
+        save_questions(questions)
 
         if latest_record:
             return Response(QuestionsSerializer(latest_record, many=False).data, status=200)

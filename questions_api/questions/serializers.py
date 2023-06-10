@@ -8,18 +8,15 @@ class QuestionsSerializer(serializers.ModelSerializer):
     answer = serializers.CharField()
     question = serializers.CharField()
     jservice_created_at = serializers.DateTimeField()
+    created_at = serializers.DateTimeField()
 
     class Meta:
         model = Questions
-        fields = ['id', 'jservice_id', 'answer', 'question', 'jservice_created_at']
+        fields = '__all__'
 
 
 class QuestionsPostSerializer(serializers.Serializer):
-    questions_num = serializers.IntegerField()
+    questions_num = serializers.IntegerField(required=True, min_value=1)
 
     class Meta:
         fields = ['questions_num']
-
-    def validate_questions_num(self, value):
-        if value < 1:
-            raise serializers.ValidationError('questions_num must be greater than 0')
